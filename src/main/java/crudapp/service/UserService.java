@@ -1,18 +1,20 @@
-package web.service;
+package crudapp.service;
 
-import web.model.User;
+import crudapp.model.User;
 
 import java.util.List;
 
 public interface UserService {
-    void saveUser(String name, String surname, String patronymic);
 
-    void removeUserById(long id);
+    void add(User user);
 
-    List<User> getAllUsers();
-    public User getUserById(long id);
+    void delete(long id);
 
-    void cleanUsersTable();
+    void edit(User user);
 
-    User updateUserById(long id, String name, String surname, String patronymic);
+    User getById(long id);
+
+    List<User> allUsers();
+
+    void cleanTable();
 }

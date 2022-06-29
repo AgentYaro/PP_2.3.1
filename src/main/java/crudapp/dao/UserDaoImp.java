@@ -1,37 +1,59 @@
-package web.dao;
+package crudapp.dao;
 
-import web.model.User;
+import crudapp.model.User;
+
+import javax.persistence.TypedQuery;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-public class UserDaoImp implements UserDao{
-    @Override
-    public void saveUser(String name, String surname, String patronymic) {
+@Repository
+public class UserDaoImp implements UserDao {
+    @PersistenceContext
+    EntityManager entityManager;
 
+    @Transactional
+
+    @Override
+    public void add(User user) {
+        entityManager.persist(user);
     }
 
-    @Override
-    public void removeUserById(long id) {
+    @Transactional
 
+    @Override
+    public void delete(long id) {
+        entityManager.createQuery("delete from User user where user.id = ?1").setParameter(1, id).executeUpdate();
     }
 
+    @Transactional
+
     @Override
-    public List<User> getAllUsers() {
-        return null;
+    public void edit(User user) {
+        entityManager.merge(user);
     }
 
+    @Transactional
+
     @Override
-    public User getUserById(long id) {
-        return null;
+    public User getById(long id) {
+        return (User) entityManager.createQuery("select user from User user where user.id = ?1").setParameter(1, id).getResultList().get(0);
     }
 
-    @Override
-    public void cleanUsersTable() {
+    @Transactional
 
+    @Override
+    public List<User> allUsers() {
+        TypedQuery<User> query = entityManager.createQuery("select user from User user", User.class);
+        return query.getResultList();
     }
 
+    @Transactional
     @Override
-    public User updateUserById(long id, String name, String surname, String patronymic) {
-        return null;
+    public void cleanTable() {
+        entityManager.createQuery("delete from User").executeUpdate();
     }
 }

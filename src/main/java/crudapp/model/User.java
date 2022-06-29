@@ -1,21 +1,28 @@
-package web.model;
+package crudapp.model;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "users")
 public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
-
+    @Column(name = "name")
     private String name;
-
+    @Column(name = "surname")
     private String surname;
-
+    @Column(name = "patronymic")
     private String patronymic;
 
     public User() {
     }
 
-    public User(String name, String surname, String email) {
-        this.name = name;
+    public User(String surname, String name, String patronymic) {
         this.surname = surname;
-        this.patronymic = email;
+        this.name = name;
+        this.patronymic = patronymic;
     }
 
     public Long getId() {
@@ -42,17 +49,16 @@ public class User {
         this.surname = surname;
     }
 
-    public String getEmail() {
+    public String getPatronymic() {
         return patronymic;
     }
 
-    public void setEmail(String email) {
-        this.patronymic = email;
+    public void setPatronymic(String patronymic) {
+        this.patronymic = patronymic;
     }
 
     @Override
     public String toString() {
-        return "User " + "with id = " + id + " called " + name + " " + surname + " " + patronymic;
+        return "User " + "with id = " + id + " called " + surname + " " + name + " " + patronymic;
     }
 }
-

@@ -1,10 +1,38 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
     <title>CRUD App</title>
 </head>
 <body>
 List of all users
+<div th:if="${users.isEmpty()}">
+    <h1>Table is empty!</h1>
+</div>
+<div th:if="${not users.isEmpty()}">
+    <table>
+        <tr>
+            <th>Id</th>
+            <th>Surname</th>
+            <th>Name</th>
+            <th>Patronymic</th>
+            <th>Action</th>
+        </tr>
+        <tr th:each="user : ${users}">
+            <td th:utext="${user.getId()}">id</td>
+            <td th:utext="${user.getSurname()}">surname</td>
+            <td th:utext="${user.getName()}">name</td>
+            <td th:utext="${user.getPatronymic()}">patronymic</td>
+            <td>
+                <a href="/edit" th:href="@{/edit(id=${user.getId()})}">edit</a>
+                <a href="/delete" th:href="@{/delete(id=${user.getId()})}">delete</a>
+            </td>
+        </tr>
+    </table>
+</div>
+<h2>Add</h2>
+<a href="/add">Add new User</a>
+<h2>Clear Table</h2>
+<a href="/clear">Clear</a>
 </body>
 </html>

@@ -1,4 +1,4 @@
-package crudapp.web.config;
+package crudapp.config;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;

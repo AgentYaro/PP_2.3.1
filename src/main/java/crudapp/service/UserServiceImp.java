@@ -1,39 +1,51 @@
-package web.service;
+package crudapp.service;
 
-import web.dao.UserDao;
-import web.dao.UserDaoImp;
-import web.model.User;
+import crudapp.dao.UserDao;
+import crudapp.model.User;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-public class UserServiceImp implements UserService{
-    UserDao userDao = new UserDaoImp();
+@Service
+public class UserServiceImp implements UserService {
+    private UserDao userDao;
+
+    @Autowired
+    public void setUserDao(UserDao userDao) {
+        this.userDao = userDao;
+    }
+
+
+
     @Override
-    public void saveUser(String name, String surname, String patronymic) {
-        userDao.saveUser(name,surname,patronymic);
+    public void add(User user) {
+        userDao.add(user);
     }
 
     @Override
-    public void removeUserById(long id) {
-        userDao.removeUserById(id);
-    }
-    @Override
-    public User getUserById(long id) {
-        return userDao.getUserById(id);
+    public void delete(long id) {
+        userDao.delete(id);
     }
 
     @Override
-    public List<User> getAllUsers() {
-        return userDao.getAllUsers();
+    public void edit(User user) {
+        userDao.edit(user);
     }
 
     @Override
-    public void cleanUsersTable() {
-        userDao.cleanUsersTable();
+    public User getById(long id) {
+        return userDao.getById(id);
     }
 
     @Override
-    public User updateUserById(long id,String name, String surname, String patronymic) {
-        return userDao.updateUserById(id,name,surname,patronymic);
+    public List<User> allUsers() {
+        return userDao.allUsers();
+    }
+
+    @Override
+    public void cleanTable() {
+        userDao.cleanTable();
     }
 }

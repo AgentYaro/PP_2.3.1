@@ -1,10 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>CRUD App</title>
 </head>
 <body>
-
+<form action="#" th:object="${user}" th:action="${type==1}?'/edit':'/add'" method="POST">
+    <input th:id="*{id}" type="hidden" name="id" value=-1 th:value="${user.getId()}">
+    <label for="surname">Surname</label>
+    <input th:id="*{surname}" type="text" name="surname" id="surname" placeholder="Surname"
+           th:placeholder="${user.getSurname()}">
+    <label for="name">Name</label>
+    <input th:id="*{name}" type="text" name="name" id="name" placeholder="Name" th:placeholder="${user.getName()}">
+    <label for="patronymic">Patronymic</label>
+    <input th:id="*{patronymic}" type="text" name="patronymic" id="patronymic" placeholder="Patronymic"
+           th:placeholder="${user.getPatronymic()}">
+    <input type="submit" value="Execute">
+</form>
 </body>
 </html>

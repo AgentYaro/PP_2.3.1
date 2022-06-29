@@ -1,19 +1,19 @@
-package web.dao;
+package crudapp.dao;
 
-import web.model.User;
+import crudapp.model.User;
 
 import java.util.List;
 
 public interface UserDao {
+    void add(User user);
 
-    void saveUser(String name, String surname,String patronymic);
+    void delete(long id);
 
-    void removeUserById(long id);
+    void edit(User user);
 
-    List<User> getAllUsers();
-    public User getUserById(long id);
+    User getById(long id);
 
-    void cleanUsersTable();
+    List<User> allUsers();
 
-    User updateUserById(long id, String name, String surname, String patronymic);
+    void cleanTable();
 }
