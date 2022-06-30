@@ -9,20 +9,27 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
-    @Column(name = "name")
-    private String name;
     @Column(name = "surname")
     private String surname;
-    @Column(name = "patronymic")
-    private String patronymic;
+    @Column(name = "name")
+    private String name;
+    @Column(name = "age")
+    private int age;
+    @Column(name = "email")
+    private String email;
+    @Column(name = "role")
+    private Role role;
 
     public User() {
     }
 
-    public User(String surname, String name, String patronymic) {
+    public User(Long id, String surname, String name, int age, String email, Role role) {
+        this.id = id;
         this.surname = surname;
         this.name = name;
-        this.patronymic = patronymic;
+        this.age = age;
+        this.email = email;
+        this.role = role;
     }
 
     public Long getId() {
@@ -33,14 +40,6 @@ public class User {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public String getSurname() {
         return surname;
     }
@@ -49,16 +48,47 @@ public class User {
         this.surname = surname;
     }
 
-    public String getPatronymic() {
-        return patronymic;
+    public String getName() {
+        return name;
     }
 
-    public void setPatronymic(String patronymic) {
-        this.patronymic = patronymic;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
     }
 
     @Override
     public String toString() {
-        return "User " + "with id = " + id + " called " + surname + " " + name + " " + patronymic;
+        return "User{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", age=" + age +
+                ", email='" + email + '\'' +
+                ", role=" + role +
+                '}';
     }
 }

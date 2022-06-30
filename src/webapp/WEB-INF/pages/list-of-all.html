@@ -10,29 +10,39 @@ List of all users
     <h1>Table is empty!</h1>
 </div>
 <div th:if="${not users.isEmpty()}">
-    <table>
+    <table border="1">
         <tr>
             <th>Id</th>
             <th>Surname</th>
             <th>Name</th>
-            <th>Patronymic</th>
+            <th>Age</th>
+            <th>Email</th>
+            <th>Role</th>
             <th>Action</th>
         </tr>
         <tr th:each="user : ${users}">
             <td th:utext="${user.getId()}">id</td>
             <td th:utext="${user.getSurname()}">surname</td>
             <td th:utext="${user.getName()}">name</td>
-            <td th:utext="${user.getPatronymic()}">patronymic</td>
+            <td th:utext="${user.getAge()}">id</td>
+            <td th:utext="${user.getEmail()}">surname</td>
+            <td th:utext="${user.getRole()}">name</td>
             <td>
-                <a href="/edit" th:href="@{/edit(id=${user.getId()})}">edit</a>
-                <a href="/delete" th:href="@{/delete(id=${user.getId()})}">delete</a>
+                <form th:method="PATCH" th:action="@{/edit(id=${user.getId()})}">
+                    <input type="submit" value="Edit"/>
+                </form>
+                <form th:method="DELETE" th:action="@{/delete(id=${user.getId()})}">
+                    <input type="submit" value="Delete"/>
+                </form>
             </td>
         </tr>
     </table>
 </div>
-<h2>Add</h2>
-<a href="/add">Add new User</a>
-<h2>Clear Table</h2>
-<a href="/clear">Clear</a>
+<form th:method="POST" th:action="@{/add}">
+    <input type="submit" value="Add"/>
+</form>
+<form th:method="DELETE" th:action="@{/clear}">
+    <input type="submit" value="Clear Table"/>
+</form>
 </body>
 </html>

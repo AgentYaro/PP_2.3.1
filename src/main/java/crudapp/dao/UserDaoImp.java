@@ -26,7 +26,7 @@ public class UserDaoImp implements UserDao {
 
     @Override
     public void delete(long id) {
-        entityManager.createQuery("delete from User user where user.id = ?1").setParameter(1, id).executeUpdate();
+        entityManager.remove(getById(id));
     }
 
     @Transactional
@@ -40,7 +40,7 @@ public class UserDaoImp implements UserDao {
 
     @Override
     public User getById(long id) {
-        return (User) entityManager.createQuery("select user from User user where user.id = ?1").setParameter(1, id).getResultList().get(0);
+        return entityManager.find(User.class,id);
     }
 
     @Transactional

@@ -5,16 +5,26 @@
     <title>CRUD App</title>
 </head>
 <body>
-<form action="#" th:object="${user}" th:action="${type==1}?'/edit':'/add'" method="POST">
-    <input th:id="*{id}" type="hidden" name="id" value=-1 th:value="${user.getId()}">
+<form action="#" th:object="${user}" th:action="${type==1}?'/edit':'/add'" th:method="PUT">
+    <input th:id="*{getId()}" type="hidden" name="id" value=-1 th:value="${user.getId()}">
     <label for="surname">Surname</label>
-    <input th:id="*{surname}" type="text" name="surname" id="surname" placeholder="Surname"
-           th:placeholder="${user.getSurname()}">
+    <input th:id="*{getSurname()}" type="text" name="surname" id="surname" placeholder="Surname"
+           th:value="${user.getSurname()}">
     <label for="name">Name</label>
-    <input th:id="*{name}" type="text" name="name" id="name" placeholder="Name" th:placeholder="${user.getName()}">
-    <label for="patronymic">Patronymic</label>
-    <input th:id="*{patronymic}" type="text" name="patronymic" id="patronymic" placeholder="Patronymic"
-           th:placeholder="${user.getPatronymic()}">
+    <input th:id="*{getName()}" type="text" name="name" id="name" placeholder="Name" th:value="${user.getName()}">
+    <label for="age">Age</label>
+    <input th:id="*{getAge()}" type="number" name="age" id="age" placeholder="Age" th:value="${user.getAge()}" min=0>
+    <label for="email">Email</label>
+    <input th:id="*{getEmail()}" type="email" name="email" id="email" placeholder="Email" th:value="${user.getEmail()}">
+    <label for="role">Role</label>
+    <select th:id="*{getRole()}" name="role" id="role">
+        <option value="USER">
+            USER
+        </option>
+        <option value="ADMIN">
+            ADMIN
+        </option>
+    </select>
     <input type="submit" value="Execute">
 </form>
 </body>
